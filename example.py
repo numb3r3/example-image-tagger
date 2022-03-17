@@ -29,13 +29,13 @@ def predict_tags(doc: 'Document', matches: 'DocumentArray'):
 
 
 examples = DocumentArray.load_binary('../text-image-retrieval/data/sample_da_12')
-for doc in examples[100:]:
+for doc in examples[150:]:
     # conduct image document
     if not doc.blob and len(doc.chunks) > 0:
         doc.blob = doc.chunks.sample(1)[0].blob
 
-        # optional: to save image for manual check
-        doc.save_blob_to_file('example.jpg')
+        # # optional: to save image for manual check
+        # doc.save_blob_to_file('example.jpg')
 
     print(f'==> input doc: {doc.tags["caption"]}')
 

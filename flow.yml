@@ -7,6 +7,7 @@ with:                                             # Parameters for the flow are 
 executors:                                        # Now, we define the executors that are used
   - name: 'encoder'
     uses: 'jinahub://CLIPEncoder/v0.3.0'
+    install_requirements: true
     timeout_ready: -1
     uses_with:
       pretrained_model_name_or_path: openai/clip-vit-base-patch32
@@ -14,6 +15,7 @@ executors:                                        # Now, we define the executors
 
   - name: 'indexer'
     uses: 'jinahub://HNSWPostgresIndexer/v0.8'
+    install_requirements: true
     uses_with:
       dim: 512
       metric: cosine
