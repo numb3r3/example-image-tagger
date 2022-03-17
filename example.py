@@ -28,7 +28,7 @@ def predict_tags(doc: 'Document', matches: 'DocumentArray'):
     return OrderedDict(sorted(token_weights.items(), key=lambda x: x[1], reverse=True))
 
 
-examples = DocumentArray.load_binary('../text-image-retrieval/data/sample_da_12')
+examples = DocumentArray.load_binary('./data/sample_da_12')
 for doc in examples[150:]:
     # conduct image document
     if not doc.blob and len(doc.chunks) > 0:
