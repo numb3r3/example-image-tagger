@@ -1,0 +1,26 @@
+jtype: Flow                                       # We configure the index flow here that is used for indexing images and captions
+version: '1'                                      # yml version
+with:                                             # Parameters for the flow are defined after with
+  cors: true
+  no_debug_endpoints: true
+
+executors:                                        # Now, we define the executors that are used
+  - name: 'encoder'
+    uses: 'jinahub://CLIPEncoder/v0.3.0'
+    timeout_ready: -1
+    uses_with:
+      pretrained_model_name_or_path: openai/clip-vit-base-patch32
+      finetuned_checkpoint_path: https://jina-pretrained-models.s3.us-west-1.amazonaws.com/yahaha-clip-models/finetuned-50epochs-yahaha.pth
+
+  - name: 'indexer'
+    uses: 'jinahub://HNSWPostgresIndexer/v0.8'
+    uses_with:
+      dim: 512
+      metric: cosine
+      startup_sync: true
+      hostname: 127.0.0.1
+      port: 5432
+      username: postgres
+      password: 123456
+      table: image_indexer
+      return_embeddings: false
